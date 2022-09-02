@@ -1,0 +1,15 @@
+// Copyright (C) 2022 Stryzhniou Fiodar
+// Public domain
+
+TARGETPATH      sys\bin
+TARGETTYPE      exe
+
+
+SYSTEMINCLUDE   \epoc32\include
+SYSTEMINCLUDE   \epoc32\include\libc
+
+LIBRARY cone.lib euser.lib estlib.lib
+
+bytepaircompresstarget
+
+//OPTION	GCCE -I'/Symbian/S60_5th_Edition_SDK_v1.0/epoc32/include/zlib'
