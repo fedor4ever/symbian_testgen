@@ -12,4 +12,15 @@ LIBRARY cone.lib euser.lib estlib.lib
 
 bytepaircompresstarget
 
+// estlib's crt accept only nonstandard 'int main(void)',
+// with 'main(argc, argv)' app crashes,
+// so simple wrapper used by default
+#define USE_STANDARD_MAIN
+
+#if USE_STANDARD_MAIN
+SOURCE			..\test_builder\main.cpp
+#else
+STATICLIBRARY	ecrt0.lib
+#endif
+
 //OPTION	GCCE -I'/Symbian/S60_5th_Edition_SDK_v1.0/epoc32/include/zlib'
