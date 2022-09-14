@@ -35,6 +35,10 @@ phone_menu_folder = "" #tests_installer_name
 
 src_path = ""
 
+# Set if logs saved in non existed folder because
+# redirecting printf to file doesn't create folder
+test_log_folder = None
+
 if __name__ == "__main__":
    test_builder.run(uid_range_start, tests, test_installer_name,
-       project_path, phone_menu_folder, src_path)
+       project_path, phone_menu_folder, src_path, test_log_folder)

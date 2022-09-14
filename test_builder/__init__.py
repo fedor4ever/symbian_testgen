@@ -28,13 +28,14 @@ from pkg_addon_generator import create_addon_pkg
 from prj_app_generator import create_app_mmps
 
 def run(uid_range_start, tests, test_installer_name,
-       project_path, phone_menu_folder, src_path):
+       project_path, phone_menu_folder, src_path,
+       test_log_folder):
     log = "Build tests started at: %s\n" %time.ctime()
     save2file(build_log, log)
     save2file(build_err, '')
 
     create_app_mmps(project_path, tests, uid_range_start, phone_menu_folder, src_path)
-    create_addon_pkg(project_path, tests, uid_range_start, test_installer_name)
+    create_addon_pkg(project_path, tests, uid_range_start, test_installer_name, test_log_folder)
     build_apps(project_path)
     build_installers(project_path)
 

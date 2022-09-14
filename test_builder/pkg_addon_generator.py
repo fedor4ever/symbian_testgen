@@ -60,6 +60,7 @@ mif_install = """
 ;    \"$(EPOCROOT)epoc32\\data\\z\\resource\\apps\\GOLD.mif\" -	\"!:\\resource\\apps\\GOLD.mif\"
 """
 
+folder_logs = '\n\n"test_builder\\placeholder" - "FOLDER_NAME\\placeholder"\n'
 
 def EPOCROOT_to_path():
    return os.path.join( os.path.splitdrive(os.getcwd())[0], os.environ['EPOCROOT'])
@@ -82,12 +83,20 @@ def package_name(name, isCmdline = False):
       name += "-cmdline"
    return name + ".pkg"
 
-def create_addon_pkg(project_path, tests, UID3, test_installer_name):
+def placeholder_folder(folder):
+   if folder is None:
+       return ""
+   return folder_logs.replace("FOLDER_NAME", folder)
+
+def create_addon_pkg(project_path, tests, UID3, test_installer_name, folder):
    uid = hex(UID3).rstrip("Ll")
+   placeholder = placeholder_folder(folder)
    file     = os.path.join(project_path, package_name(test_installer_name))
    file_cmd = os.path.join(project_path, package_name(test_installer_name, True))
    save2file(file,     install_header(uid, test_installer_name))
    save2file(file_cmd, install_header(uid, test_installer_name))
+   append2file(file,     placeholder)
+   append2file(file_cmd, placeholder)
    for test in tests:
       append2file(file_cmd,  replace_EPOCROOT(test[0]))
       append2file(file,      eclipse_installer.replace("test_name", test[0]))
