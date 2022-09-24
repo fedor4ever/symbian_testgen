@@ -67,7 +67,7 @@ def build_apps(path):
    for x in nodes:
       dir = os.path.join(path, x)
       if os.path.isdir(dir):
-	     q.put(dir)
+         q.put(dir)
 
    t_count = mp.cpu_count() + 2
    if t_count > q.qsize():
